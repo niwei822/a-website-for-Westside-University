@@ -1,6 +1,11 @@
-import data from '../data/students.json' assert { type: 'json' }
+import fs from 'fs';
+import path from 'path';
 
-const students = data.students
+// Path to the JSON file
+const studentsFilePath = path.resolve('src/data/students.json');
+
+// Read and parse the JSON file
+const students = JSON.parse(fs.readFileSync(studentsFilePath, 'utf8'));
 
 const ctrlFns = {
   getAllStudents: (req, res) => {

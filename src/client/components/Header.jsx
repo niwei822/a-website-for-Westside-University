@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 const Header = () => {
   return (
@@ -6,8 +6,8 @@ const Header = () => {
       <nav className='nav'>
         <div>WestSide University</div>
         <div className='link-wrap'>
-          <Link to='/' className='links'>Home</Link>
-          <Link to='/about' className='links'>About</Link>
+        <NavLink to="/" className={({ isActive }) => (isActive ? 'active-link' : 'links')}>Home</NavLink>
+          <NavLink to='/about' className={({ isActive }) => (isActive ? 'active-link' : 'links' )}>About</NavLink>
         </div>
       </nav>
     </header>

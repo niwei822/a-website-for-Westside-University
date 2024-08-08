@@ -6,8 +6,8 @@ const About = () => {
     <div className='main'>
       <Header />
       <div className='sub-nav'>
-        <Link to='/about/history' className='sub-links'>History</Link>
-        <Link to='/about/contact' className='sub-links'>Contact</Link>
+        <Link to='/about/history' className='subnav_links'>History</Link>
+        <Link to='/about/contact' className='subnav_links'>Contact</Link>
       </div>
         <Outlet />
       </div>

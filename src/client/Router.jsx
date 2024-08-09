@@ -8,14 +8,14 @@ import AboutMain from "./components/AboutMain";
 import ClassList from "./components/ClassList";
 import axios from "axios";
 
-// Define the loader function directly in this file
-const fetchClassData = async (className) => {
+const fetchClassData = async ({ params }) => {
     try {
-        const res = await axios.get(`/classlist/${className}`);
-        return res.data;
-    } catch (err) {
-        console.error(err);
-        throw err;
+        const { class: className } = params;
+        const response = await axios.get(`/classlist/${className}`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching class data:", error);
+        throw error;
     }
 };
 
@@ -27,7 +27,7 @@ const ClassListLoader = () => {
     const [error, setError] = React.useState(null);
 
     React.useEffect(() => {
-        fetchClassData(className)
+        fetchClassData({ params: { class: className } })
             .then((data) => {
                 setData(data);
                 setLoading(false);
@@ -38,19 +38,14 @@ const ClassListLoader = () => {
             });
     }, [className]);
 
-    if (loading) {
-        return <p>Loading...</p>;
-    }
-    if (error) {
-        return <p>Error: {error.message}</p>;
-    }
-    if (!data) {
-        return <p>No data available.</p>;
-    }
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error.message}</p>;
+    if (!data) return <p>No data available.</p>;
 
-    return <ClassList data={data} />;
+    return <ClassList students={data} />;
 };
 
+// Main Router component
 const AppRouter = () => {
     return (
         <Router>
